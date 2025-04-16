@@ -1,17 +1,23 @@
 // app/layout.tsx
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
 export const metadata: Metadata = {
   title: 'Social Bubble - Your Social Media Marketing Partner',
   description: 'Designing Exceptional Web Experiences that Bring More Happiness to the Digital World',
   keywords: ['web development', 'ecommerce', 'shopify', 'wordpress', 'android development'],
-  authors: [{ name: 'Social Bubble' }],
-  viewport: 'width=device-width, initial-scale=1',
+  authors: [{ name: 'Omkar Palika' }],
 }
 
 export default function RootLayout({
@@ -24,7 +30,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased theme-transition`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

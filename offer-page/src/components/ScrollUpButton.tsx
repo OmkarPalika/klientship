@@ -26,11 +26,15 @@ export default function ScrollUpButton() {
   return (
     <button
       onClick={scrollToTop}
-      className={`rounded-full bg-gradient-to-br from-primary to-accent shadow-lg text-white transition-opacity duration-300 animate-fade-in ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      className={`rounded-full shadow-lg text-primary-foreground transition-opacity duration-300 hover-effect ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       aria-label="Scroll to top"
       style={{ zIndex: 1000 }}
     >
-      <svg width="48" height="48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+      <svg width="48" height="48" fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"
+        viewBox="0 0 24 24">
+        <path d="M18 15l-6-6-6 6" />
+      </svg>
     </button>
-  );
+  )
 }

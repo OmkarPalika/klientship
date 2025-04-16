@@ -18,16 +18,16 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8">
+    <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-background">
       <div className="max-w-md mx-auto text-center space-y-6">
         <div className="flex justify-center">
-          <AlertCircle className="h-16 w-16 text-destructive" />
+          <AlertCircle className="h-16 w-16 text-[hsl(var(--destructive))]" />
         </div>
-        <h2 className="text-2xl font-bold">Something went wrong!</h2>
+        <h2 className="text-2xl font-bold text-foreground">Something went wrong!</h2>
         <p className="text-muted-foreground">
           An error occurred while loading the dashboard. Please try again.
         </p>
-        <Button onClick={() => reset()}>Try again</Button>
+        <Button onClick={() => reset()} variant="default">Try again</Button>
       </div>
     </div>
   )

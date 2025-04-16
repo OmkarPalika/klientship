@@ -280,3 +280,22 @@
     @apply grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))];
   }
 }
+
+@layer components {
+  /* Add these new component styles */
+  .link {
+    @apply text-[hsl(var(--primary))] hover:text-[hsl(var(--primary))/0.8] underline-offset-4 hover:underline;
+  }
+
+  .glass-card {
+    @apply bg-[hsl(var(--card))]/80 backdrop-blur-sm border-[hsl(var(--border))]/40 hover:bg-[hsl(var(--card))]/90;
+  }
+
+  .hover-effect {
+    @apply transition-all duration-300 hover:scale-105 active:scale-95;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))];
+  }
+}
