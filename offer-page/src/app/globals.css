@@ -1,0 +1,276 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 160 20% 8%;
+    --foreground: 0 0% 100%;
+    
+    --card: 160 18% 14%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 160 18% 12%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 145 70% 30%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 160 15% 20%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 160 12% 25%;
+    --muted-foreground: 160 10% 55%;
+    
+    --accent: 45 95% 60%;
+    --accent-foreground: 160 18% 14%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 160 15% 20%;
+    --input: 160 15% 20%;
+    --ring: 145 70% 30%;
+    
+    --radius: 0.5rem;
+  }
+  
+  .dark {
+    --background: 160 20% 4%;
+    --foreground: 0 0% 98%;
+    
+    --card: 160 18% 8%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 160 18% 6%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 145 70% 25%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 160 15% 12%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 160 12% 15%;
+    --muted-foreground: 160 10% 65%;
+    
+    --accent: 45 95% 50%;
+    --accent-foreground: 160 18% 8%;
+    
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 160 15% 12%;
+    --input: 160 15% 12%;
+    --ring: 145 70% 25%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-[hsl(var(--border))];
+  }
+  
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased min-h-screen;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium tracking-tight;
+  }
+  
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-6xl;
+  }
+  
+  h2 {
+    @apply text-3xl sm:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl sm:text-xl;
+  }
+  
+  p {
+    @apply leading-7;
+  }
+
+  /* Focus styles for better accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-[hsl(var(--ring))] ring-offset-2 ring-offset-[hsl(var(--background))];
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-[hsl(var(--background))];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[hsl(var(--muted))] rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-[hsl(var(--muted-foreground))];
+  }
+}
+
+@layer components {
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[hsl(var(--primary)/0.1)];
+  }
+
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 dark:bg-black/10;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))];
+  }
+  
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-[hsl(var(--background))] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .btn-primary {
+    @apply bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--primary))/0.9];
+  }
+  
+  .btn-secondary {
+    @apply bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] hover:bg-[hsl(var(--secondary))/0.9];
+  }
+}
+
+@layer utilities {
+  /* Modern animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-in-left {
+    animation: slideInLeft 0.5s ease-out forwards;
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Fixed position utilities */
+  .fixed-bottom-right {
+    @apply fixed bottom-6 right-6 flex flex-col gap-3 z-50;
+  }
+  
+  .theme-transition {
+    @apply transition-colors duration-300 ease-in-out;
+  }
+  
+  /* Animation delay utilities */
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+
+  /* Keyframes definitions */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.1);
+    }
+    80% {
+      opacity: 1;
+      transform: scale(0.89);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+  
+  /* Modern layout utilities */
+  .grid-auto-fit {
+    @apply grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))];
+  }
+  
+  .grid-auto-fill {
+    @apply grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))];
+  }
+}
