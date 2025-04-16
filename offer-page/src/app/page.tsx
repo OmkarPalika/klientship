@@ -178,6 +178,7 @@ export default function Home() {
 
       {/* Floating Buttons */}
       <div className="fixed bottom-6 right-4 flex flex-col gap-4 z-[999]">
+        <ScrollUpButton />
         <button
           onClick={() => {
             setEditingFeature(null)
@@ -197,7 +198,6 @@ export default function Home() {
           </svg>
         </button>
 
-        <ScrollUpButton />
       </div>
 
       {/* Header */}
@@ -205,7 +205,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <Logo src="https://klientship.online/social-bubble/assets/images/logo.png" />
           <div className='flex gap-4'>
-            <Button className='bg-green-800 hover:bg-green-900 text-white transition-all hover:scale-105' onClick={handleWhatsApp}>Contact Us</Button>
+            <Button 
+              className='bg-green-800 hover:bg-green-900 text-white transition-all hover:scale-105' 
+              onClick={handleWhatsApp}
+              aria-label="Contact us on WhatsApp"
+            >
+              Contact Us
+            </Button>
             <ThemeToggler />
           </div>
         </div>
@@ -260,6 +266,7 @@ export default function Home() {
                   feature={feature}
                   onEdit={handleEditFeature}
                   onDelete={handleDeleteFeature}
+                  index={features.indexOf(feature)}
                 />
               ))}
             </motion.div>
@@ -284,3 +291,4 @@ export default function Home() {
     </div>
   )
 }
+

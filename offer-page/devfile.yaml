@@ -1,0 +1,21 @@
+schemaVersion: 2.0.0
+metadata:
+  name: next-js-app
+  version: 1.0.0
+components:
+  - name: dev
+    container:
+      image: public.ecr.aws/aws-mde/universal-image:latest
+commands:
+  - id: install
+    exec:
+      component: dev
+      commandLine: "npm install"
+  - id: build
+    exec:
+      component: dev
+      commandLine: "npm run build"
+  - id: test
+    exec:
+      component: dev
+      commandLine: "npm run lint"  # Using lint as test since no test script is defined

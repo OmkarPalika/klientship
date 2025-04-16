@@ -1,10 +1,6 @@
-// app/robots.txt
-export default function robots() {
-  return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
-    sitemap: 'https://yourdomain.com/sitemap.xml',
-  }
-}
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://klientship-offer-page.vercel.app/sitemap.xml

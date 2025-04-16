@@ -3,14 +3,15 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { ThemeEffect } from '@/lib/theme-effect'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
 }
 
 export const metadata: Metadata = {
@@ -27,13 +28,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased theme-transition`}>
+      <body className={`${inter.className} antialiased theme-transition bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
+          enableSystem={false}
+          storageKey="offer-page-theme"
         >
+          <ThemeEffect />
           {children}
         </ThemeProvider>
       </body>

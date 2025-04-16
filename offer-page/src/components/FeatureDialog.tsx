@@ -22,6 +22,7 @@ type FormData = {
   description: string
   price: string
   keyFeatures: string[]
+  image: string
 }
 
 export default function FeatureDialog({ open, onOpenChange, onSave, feature }: FeatureDialogProps) {
@@ -29,7 +30,8 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
     title: '',
     description: '',
     price: '',
-    keyFeatures: ['']
+    keyFeatures: [''],
+    image: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -39,14 +41,16 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
         title: feature.title,
         description: feature.description,
         price: feature.price || '',
-        keyFeatures: feature.keyFeatures || ['']
+        keyFeatures: feature.keyFeatures || [''],
+        image: feature.image || ''
       })
     } else {
       setFormData({
         title: '',
         description: '',
         price: '',
-        keyFeatures: ['']
+        keyFeatures: [''],
+        image: ''
       })
     }
   }, [feature, open])
@@ -83,12 +87,13 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
     setIsSubmitting(true)
     try {
       const filteredKeyFeatures = formData.keyFeatures.filter(item => item.trim() !== '')
-      
+
       const submissionData = {
         title: formData.title.trim(),
         description: formData.description.trim(),
         price: formData.price.trim() || undefined,
         keyFeatures: filteredKeyFeatures.length > 0 ? filteredKeyFeatures : undefined,
+        image: formData.image.trim() || undefined,
         ...(feature && { id: feature.id })
       }
 
@@ -105,8 +110,20 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
           <DialogHeader>
             <DialogTitle className="text-white">{feature ? 'Edit Service' : 'Add New Service'}</DialogTitle>
           </DialogHeader>
-          
+
           <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="image" className="text-gray-300">Image URL</Label>
+              <Input
+                id="image"
+                value={formData.image}
+                onChange={(e) => handleChange('image', e.target.value)}
+                placeholder="Enter image URL or path"
+                type="url"
+                className="bg-gray-800 border-gray-900 text-white"
+              />
+            </div>
+
             <div className="grid gap-2">
               <Label htmlFor="title" className="text-gray-300">Title</Label>
               <Input
@@ -120,7 +137,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                 className="bg-gray-800 border-gray-900 text-white"
               />
             </div>
-            
+
             <div className="grid gap-2">
               <Label htmlFor="description" className="text-gray-300">Description</Label>
               <Textarea
@@ -134,7 +151,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                 className="bg-gray-800 border-gray-900 text-white"
               />
             </div>
-            
+
             <div className="grid gap-2">
               <Label htmlFor="price" className="text-gray-300">Price (with currency)</Label>
               <Input
@@ -146,13 +163,13 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                 className="bg-gray-800 border-gray-900 text-white"
               />
             </div>
-            
+
             <div className="grid gap-2">
               <div className="flex justify-between items-center">
                 <Label className="text-gray-300">Key Features</Label>
-                <Button 
-                  type="button" 
-                  variant="outline" 
+                <Button
+                  type="button"
+                  variant="outline"
                   size="sm"
                   onClick={addKeyFeature}
                   disabled={formData.keyFeatures.length >= 10}
@@ -161,7 +178,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                   Add Feature
                 </Button>
               </div>
-              
+
               <div className="space-y-2">
                 {formData.keyFeatures.map((feature, index) => (
                   <div key={index} className="flex gap-2">
@@ -187,7 +204,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
               </div>
             </div>
           </div>
-          
+
           <DialogFooter>
             <Button
               type="button"
@@ -197,8 +214,8 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
             >
               Cancel
             </Button>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isSubmitting || !formData.title.trim() || !formData.description.trim()}
               className="bg-green-800 hover:bg-green-900 text-white"
             >
