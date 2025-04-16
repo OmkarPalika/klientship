@@ -1,14 +1,13 @@
 // components/Logo.tsx
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
-export default function Logo() {
+export default function Logo(props: { src: string | StaticImport }) {
   return (
     <Link href="/" className="flex items-center">
-      <span className="font-bold text-2xl text-white">
-        <span className="text-yellow-400">S</span>ocial
-        <span className="text-yellow-400">B</span>ubble
-      </span>
+      <Image src={props.src} width={60} height={60} alt='Logo' />
     </Link>
   )
 }

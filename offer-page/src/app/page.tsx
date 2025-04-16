@@ -1,9 +1,7 @@
-// app/page.tsx
 'use client'
 
 import { useEffect, useState, useMemo, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
-import { PlusIcon } from 'lucide-react'
 import FeatureDialog from '@/components/FeatureDialog'
 import FeatureCard from '@/components/FeatureCard'
 import { Toaster } from '@/components/ui/sonner'
@@ -12,8 +10,8 @@ import { motion } from 'framer-motion'
 import Logo from '@/components/Logo'
 import Footer from '@/components/Footer'
 import ThemeToggler from '@/components/ThemeToggler'
+import ScrollUpButton from '@/components/ScrollUpButton'
 
-// Define Feature type
 export type Feature = {
   id: string
   title: string
@@ -37,7 +35,7 @@ export default function Home() {
       title: 'Shopify eCommerce Website',
       description: 'Create a powerful Shopify store for seamless shopping.',
       price: 'INR 1999',
-      image: '/shopify.jpg',
+      image: 'https://klientship.online/social-bubble/assets/images/posters/shopify_ecommerce.jpg',
       keyFeatures: [
         'E-commerce Store Setup',
         'Payment Gateway Integration',
@@ -53,7 +51,7 @@ export default function Home() {
       title: 'WordPress eCommerce Website',
       description: 'Create your complete online store with WooCommerce integration.',
       price: 'INR 9999',
-      image: '/wordpress.jpg',
+      image: 'https://klientship.online/social-bubble/assets/images/posters/wordpress_ecommerce%20copy.jpg',
       keyFeatures: [
         'WooCommerce Installation',
         'Payment Gateway Setup',
@@ -69,7 +67,7 @@ export default function Home() {
       title: 'Custom Android App Development',
       description: 'Convert your business idea into a full-featured Android application.',
       price: 'INR 9999',
-      image: '/android.jpg',
+      image: 'https://klientship.online/social-bubble/assets/images/posters/android_app.png',
       keyFeatures: [
         'App UI/UX Design',
         'Core Functionality',
@@ -82,28 +80,32 @@ export default function Home() {
     }
   ], [])
 
-  const loadFeatures = useCallback(async () => {
+  const loadFeatures = useCallback(() => {
     setIsLoading(true)
     try {
       const savedFeatures = localStorage.getItem('features')
       if (savedFeatures) {
-        const parsedFeatures = JSON.parse(savedFeatures)
-        const mergedFeatures = [
-          ...defaultFeatures,
-          ...parsedFeatures.filter((f: Feature) => 
-            !defaultFeatures.some(df => df.id === f.id)
-          )
-        ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        setFeatures(mergedFeatures)
+        try {
+          const parsedFeatures: Feature[] = JSON.parse(savedFeatures)
+          const merged = [
+            ...defaultFeatures,
+            ...parsedFeatures.filter(f => !defaultFeatures.some(df => df.id === f.id))
+          ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+          setFeatures(merged)
+        } catch (err) {
+          console.error('Failed to parse features:', err)
+          localStorage.removeItem('features')
+          setFeatures(defaultFeatures)
+        }
       } else {
         setFeatures(defaultFeatures)
         localStorage.setItem('features', JSON.stringify(defaultFeatures))
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Error loading features:', err)
       toast.error('Error loading services', {
         description: 'Please try refreshing the page.'
       })
-      console.error('Error loading services:', error)
       setFeatures(defaultFeatures)
     } finally {
       setIsLoading(false)
@@ -114,51 +116,44 @@ export default function Home() {
     loadFeatures()
   }, [loadFeatures])
 
-  const handleAddFeature = useCallback(async (feature: Omit<Feature, 'id' | 'createdAt' | 'updatedAt'>) => {
-    try {
-      const newFeature: Feature = {
-        ...feature,
-        id: Date.now().toString(),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      }
-      
-      setFeatures(prev => [...prev, newFeature])
-      setIsDialogOpen(false)
-      
-      toast.success('Service Added', {
-        description: `${feature.title} has been added successfully.`
-      })
-    } catch (error) {
-      toast.error('Error adding service', {
-        description: 'Please try again.'
-      })
-      console.error('Error adding service:', error)
+  useEffect(() => {
+    localStorage.setItem('features', JSON.stringify(features))
+  }, [features])
+
+  const handleAddFeature = async (feature: Omit<Feature, 'id' | 'createdAt' | 'updatedAt'>) => {
+    const newFeature: Feature = {
+      ...feature,
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     }
-  }, [])
+    setFeatures(prev => [...prev, newFeature])
+    setIsDialogOpen(false)
+    toast.success('Service Added', {
+      description: `${feature.title} has been added successfully.`
+    })
+  }
 
   const handleUpdateFeature = (updatedFeature: Feature) => {
-    setFeatures(prev => 
-      prev.map(f => 
-        f.id === updatedFeature.id 
-          ? { ...updatedFeature, updatedAt: new Date().toISOString() } 
+    setFeatures(prev =>
+      prev.map(f =>
+        f.id === updatedFeature.id
+          ? { ...updatedFeature, updatedAt: new Date().toISOString() }
           : f
       )
     )
     setIsDialogOpen(false)
     setEditingFeature(null)
-    
     toast.success('Service Updated', {
       description: `${updatedFeature.title} has been updated successfully.`
     })
   }
 
   const handleDeleteFeature = (id: string) => {
-    const featureToDelete = features.find(f => f.id === id)
+    const feature = features.find(f => f.id === id)
     setFeatures(prev => prev.filter(f => f.id !== id))
-    
     toast.error('Service Removed', {
-      description: `${featureToDelete?.title} has been removed.`
+      description: `${feature?.title} has been removed.`
     })
   }
 
@@ -167,81 +162,93 @@ export default function Home() {
     setIsDialogOpen(true)
   }
 
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent('Hi, I would like to connect with you.')
+    window.open(`https://wa.me/+919999999999?text=${message}`, '_blank')
+  }
+
   const container = {
     hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    show: { opacity: 1, transition: { staggerChildren: 0.1 } }
   }
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col theme-transition">
       <Toaster position="top-center" />
-      
-      <div className="fixed-bottom-right">
-        <ThemeToggler />
-        <Button
+
+      {/* Floating Buttons */}
+      <div className="fixed bottom-6 right-4 flex flex-col gap-4 z-[999]">
+        <button
           onClick={() => {
             setEditingFeature(null)
             setIsDialogOpen(true)
           }}
-          className="rounded-full shadow-lg bg-primary/90 hover:bg-primary transition-all duration-300"
-          size="icon"
+          className="pr-8 rounded-full w-14 h-14 flex items-center justify-center bg-primary/90 hover:bg-primary transition-all shadow-lg"
+          aria-label="Add Service"
         >
-          <PlusIcon className="h-5 w-5" />
-        </Button>
+          <svg
+            className="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </button>
+
+        <ScrollUpButton />
       </div>
-      
-      {/* Header section */}
+
+      {/* Header */}
       <header className="border-b border-gray-800 py-6 backdrop-blur-sm bg-black/50 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <Logo />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <Logo src="https://klientship.online/social-bubble/assets/images/logo.png" />
+          <div className='flex gap-4'>
+            <Button className='bg-green-800 hover:bg-green-900 text-white transition-all hover:scale-105' onClick={handleWhatsApp}>Contact Us</Button>
+            <ThemeToggler />
           </div>
         </div>
       </header>
 
+      {/* Main Content */}
       <main className="flex-grow">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
         >
-          {/* Title section */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-              Services Catalog
+            <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
+              Limited Period Offer
             </h1>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Designing Exceptional Web Experiences that Bring More Happiness to the Digital World.
+              Avail our services at special discounted rates. Offer ends soon!
             </p>
           </motion.div>
 
-          {/* Features grid */}
+          {/* Services */}
           {isLoading ? (
             <div className="flex justify-center items-center py-20">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-700"></div>
             </div>
           ) : features.length === 0 ? (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
               className="text-center py-16"
             >
-              <p className="text-gray-400 text-lg">No services yet. Click &ldquo;Add Service&rdquo; to get started.</p>
+              <p className="text-gray-400 text-lg">No services yet. Click “Add Service” to get started.</p>
             </motion.div>
           ) : (
-            <motion.div 
+            <motion.div
               variants={container}
               initial="hidden"
               animate="show"
@@ -257,24 +264,13 @@ export default function Home() {
               ))}
             </motion.div>
           )}
-
-          {/* Offer section */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="mt-16 text-center bg-gradient-to-b from-transparent to-green-950/20 rounded-2xl p-8"
-          >
-            <h2 className="text-2xl font-bold mb-4 text-green-400">Limited Period Offer</h2>
-            <p className="text-gray-400 mb-6">Book our services at special discounted prices. Offer ends soon!</p>
-          </motion.div>
         </motion.div>
       </main>
 
       <Footer />
 
-      <FeatureDialog 
-        open={isDialogOpen} 
+      <FeatureDialog
+        open={isDialogOpen}
         onOpenChange={setIsDialogOpen}
         onSave={(feature) => {
           if ('id' in feature) {

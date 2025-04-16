@@ -2,38 +2,40 @@
 
 @layer base {
   :root {
-    --background: 160 20% 8%;
-    --foreground: 0 0% 100%;
+    /* Enhanced color palette for light theme */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
     
-    --card: 160 18% 14%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 98%;
+    --card-foreground: 240 10% 3.9%;
     
-    --popover: 160 18% 12%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
     
     --primary: 145 70% 30%;
-    --primary-foreground: 0 0% 100%;
+    --primary-foreground: 0 0% 98%;
     
-    --secondary: 160 15% 20%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
     
-    --muted: 160 12% 25%;
-    --muted-foreground: 160 10% 55%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
     
     --accent: 45 95% 60%;
-    --accent-foreground: 160 18% 14%;
+    --accent-foreground: 240 5.9% 10%;
     
-    --destructive: 0 84% 60%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    
-    --border: 160 15% 20%;
-    --input: 160 15% 20%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
     --ring: 145 70% 30%;
-    
+
     --radius: 0.5rem;
   }
-  
+
   .dark {
+    /* Enhanced color palette for dark theme */
     --background: 160 20% 4%;
     --foreground: 0 0% 98%;
     
@@ -117,32 +119,36 @@
 }
 
 @layer components {
+  /* Enhanced component styles */
   .card-hover {
-    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[hsl(var(--primary)/0.1)];
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[hsl(var(--primary)/0.1)] dark:hover:shadow-[hsl(var(--primary)/0.2)];
   }
 
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 dark:bg-black/10;
+    @apply bg-white/10 backdrop-blur-md border border-white/20 dark:bg-black/20 dark:border-white/10;
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))];
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] dark:from-[hsl(var(--primary))] dark:to-[hsl(var(--accent))];
   }
-  
-  .container {
-    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
-  }
-  
+
+  /* Enhanced button styles */
   .btn {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-[hsl(var(--background))] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium 
+           ring-offset-[hsl(var(--background))] transition-all duration-300
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] 
+           focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50
+           hover:shadow-md active:scale-95;
   }
   
   .btn-primary {
-    @apply bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--primary))/0.9];
+    @apply bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] 
+           hover:bg-[hsl(var(--primary))/0.9] dark:hover:bg-[hsl(var(--primary))/0.8];
   }
   
   .btn-secondary {
-    @apply bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] hover:bg-[hsl(var(--secondary))/0.9];
+    @apply bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] 
+           hover:bg-[hsl(var(--secondary))/0.8] dark:hover:bg-[hsl(var(--secondary))/0.9];
   }
 }
 

@@ -117,7 +117,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                 required
                 autoFocus
                 maxLength={100}
-                className="bg-gray-800 border-gray-700 text-white"
+                className="bg-gray-800 border-gray-900 text-white"
               />
             </div>
             
@@ -131,7 +131,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                 required
                 rows={3}
                 maxLength={500}
-                className="bg-gray-800 border-gray-700 text-white"
+                className="bg-gray-800 border-gray-900 text-white"
               />
             </div>
             
@@ -143,7 +143,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                 onChange={(e) => handleChange('price', e.target.value)}
                 placeholder="e.g. INR 1999"
                 maxLength={20}
-                className="bg-gray-800 border-gray-700 text-white"
+                className="bg-gray-800 border-gray-900 text-white"
               />
             </div>
             
@@ -156,7 +156,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                   size="sm"
                   onClick={addKeyFeature}
                   disabled={formData.keyFeatures.length >= 10}
-                  className="h-8 text-xs bg-transparent border-gray-700 text-gray-300"
+                  className="h-8 text-xs bg-transparent border-gray-900 text-gray-300"
                 >
                   Add Feature
                 </Button>
@@ -170,7 +170,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                       onChange={(e) => handleKeyFeatureChange(index, e.target.value)}
                       placeholder={`Feature ${index + 1}`}
                       maxLength={100}
-                      className="bg-gray-800 border-gray-700 text-white"
+                      className="bg-gray-800 border-gray-900 text-white"
                     />
                     <Button
                       type="button"
@@ -193,14 +193,14 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              className="bg-transparent border-gray-700 text-gray-300 hover:bg-gray-800"
+              className="bg-transparent border-gray-900 text-gray-300 hover:bg-gray-800"
             >
               Cancel
             </Button>
             <Button 
               type="submit" 
               disabled={isSubmitting || !formData.title.trim() || !formData.description.trim()}
-              className="bg-green-600 hover:bg-green-700 text-white"
+              className="bg-green-800 hover:bg-green-900 text-white"
             >
               {isSubmitting ? 'Saving...' : feature ? 'Update' : 'Add'}
             </Button>
