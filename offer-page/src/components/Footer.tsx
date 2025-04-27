@@ -12,26 +12,30 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="space-y-4">
-            <Logo src="https://klientship.online/social-bubble/assets/images/logo-white.png" />
+            <Logo
+              src="https://klientship.online/social-bubble/assets/images/logo-white.png"
+              height={70}
+              width={70}
+            />
             <p className="text-gray-400 text-sm mt-4">
               Designing Exceptional Web Experiences that Bring More Happiness to the Digital World.
             </p>
             <div className="flex gap-4 items-center">
-              <Image 
+              <Image
                 src="https://klientship.online/social-bubble/assets/images/partners/shopify-certified-partner.png"
-                alt="Partner 1" 
+                alt="Partner 1"
                 width={20}
                 height={20}
-                className="h-12 w-auto object-contain" 
+                className="h-12 w-auto object-contain"
               />
-              <Image 
+              <Image
                 src="https://klientship.online/social-bubble/assets/images/partners/aws-partner.png"
                 alt="Partner 2"
                 width={20}
                 height={20}
                 className="h-12 w-auto object-contain"
               />
-              <Image 
+              <Image
                 src="https://klientship.online/social-bubble/assets/images/partners/razorpay.png"
                 alt="Partner 3"
                 width={20}
@@ -40,7 +44,7 @@ export default function Footer() {
               />
             </div>
           </div>
-          
+
           <div>
             <h3 className="font-medium text-white mb-4">QUICK LINKS</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
@@ -49,7 +53,7 @@ export default function Footer() {
               <li><Link href="#" className="hover:text-white transition">Privacy Policy</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-medium text-white mb-4">COMPANY</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
@@ -58,7 +62,7 @@ export default function Footer() {
               <li><Link href="#" className="hover:text-white transition">Our Subsidiaries</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-medium text-white mb-4">RESOURCES</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
@@ -67,7 +71,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        
+
         <div className="pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">Copyright © 2025 Klientship Technologies</p>
           <p className="text-gray-500 text-sm">CIN: U72900KA2022PTC162006</p>

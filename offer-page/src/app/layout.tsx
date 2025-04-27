@@ -28,12 +28,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased theme-transition bg-background text-foreground`}>
+      <body className={`${inter.className} antialiased theme-transition bg-[hsl(var(--background))] text-[hsl(var(--foreground))]`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
           storageKey="offer-page-theme"
+          disableTransitionOnChange={false}
         >
           <ThemeEffect />
           {children}
@@ -42,3 +43,4 @@ export default function RootLayout({
     </html>
   )
 }
+

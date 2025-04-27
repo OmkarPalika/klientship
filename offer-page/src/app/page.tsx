@@ -203,10 +203,14 @@ export default function Home() {
       {/* Header */}
       <header className="border-b border-gray-800 py-6 backdrop-blur-sm bg-black/50 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <Logo src="https://klientship.online/social-bubble/assets/images/logo.png" />
+          <Logo
+            src="https://klientship.online/social-bubble/assets/images/logo.png"
+            height={60}
+            width={60}
+          />
           <div className='flex gap-4'>
-            <Button 
-              className='bg-green-800 hover:bg-green-900 text-white transition-all hover:scale-105' 
+            <Button
+              className='bg-green-800 hover:bg-green-900 text-white transition-all hover:scale-105'
               onClick={handleWhatsApp}
               aria-label="Contact us on WhatsApp"
             >

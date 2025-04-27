@@ -30,7 +30,10 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['framer-motion', '@radix-ui/react-dialog', 'sonner'],
     
     // Enable modern JavaScript features
-    serverActions: true,
+    serverActions: {
+      allowedOrigins: ['klientship.online'],
+      bodySizeLimit: '2mb'
+    },
     
     // Optimize CSS
     optimizeCss: true,
