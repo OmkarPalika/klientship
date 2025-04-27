@@ -105,27 +105,27 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-gray-900 text-white border-gray-800">
+      <DialogContent className="sm:max-w-md bg-[hsl(var(--background))] text-[hsl(var(--foreground))] border-[hsl(var(--border))]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle className="text-white">{feature ? 'Edit Service' : 'Add New Service'}</DialogTitle>
+            <DialogTitle className="text-[hsl(var(--foreground))]">{feature ? 'Edit Service' : 'Add New Service'}</DialogTitle>
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="image" className="text-gray-300">Image URL</Label>
+              <Label htmlFor="image" className="text-[hsl(var(--muted-foreground))]">Image URL</Label>
               <Input
                 id="image"
                 value={formData.image}
                 onChange={(e) => handleChange('image', e.target.value)}
                 placeholder="Enter image URL or path"
                 type="url"
-                className="bg-gray-800 border-gray-900 text-white"
+                className="bg-[hsl(var(--input))] border-[hsl(var(--border))] text-[hsl(var(--foreground))]"
               />
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="title" className="text-gray-300">Title</Label>
+              <Label htmlFor="title" className="text-[hsl(var(--muted-foreground))]">Title</Label>
               <Input
                 id="title"
                 value={formData.title}
@@ -134,12 +134,12 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                 required
                 autoFocus
                 maxLength={100}
-                className="bg-gray-800 border-gray-900 text-white"
+                className="bg-[hsl(var(--input))] border-[hsl(var(--border))] text-[hsl(var(--foreground))]"
               />
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="description" className="text-gray-300">Description</Label>
+              <Label htmlFor="description" className="text-[hsl(var(--muted-foreground))]">Description</Label>
               <Textarea
                 id="description"
                 value={formData.description}
@@ -148,32 +148,32 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                 required
                 rows={3}
                 maxLength={500}
-                className="bg-gray-800 border-gray-900 text-white"
+                className="bg-[hsl(var(--input))] border-[hsl(var(--border))] text-[hsl(var(--foreground))]"
               />
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="price" className="text-gray-300">Price (with currency)</Label>
+              <Label htmlFor="price" className="text-[hsl(var(--muted-foreground))]">Price (with currency)</Label>
               <Input
                 id="price"
                 value={formData.price}
                 onChange={(e) => handleChange('price', e.target.value)}
                 placeholder="e.g. INR 1999"
                 maxLength={20}
-                className="bg-gray-800 border-gray-900 text-white"
+                className="bg-[hsl(var(--input))] border-[hsl(var(--border))] text-[hsl(var(--foreground))]"
               />
             </div>
 
             <div className="grid gap-2">
               <div className="flex justify-between items-center">
-                <Label className="text-gray-300">Key Features</Label>
+                <Label className="text-[hsl(var(--muted-foreground))]">Key Features</Label>
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   onClick={addKeyFeature}
                   disabled={formData.keyFeatures.length >= 10}
-                  className="h-8 text-xs bg-transparent border-gray-900 text-gray-300"
+                  className="h-8 text-xs bg-transparent border-[hsl(var(--border))] text-[hsl(var(--muted-foreground))]"
                 >
                   Add Feature
                 </Button>
@@ -187,7 +187,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                       onChange={(e) => handleKeyFeatureChange(index, e.target.value)}
                       placeholder={`Feature ${index + 1}`}
                       maxLength={100}
-                      className="bg-gray-800 border-gray-900 text-white"
+                      className="bg-[hsl(var(--input))] border-[hsl(var(--border))] text-[hsl(var(--foreground))]"
                     />
                     <Button
                       type="button"
@@ -195,7 +195,7 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
                       size="icon"
                       onClick={() => removeKeyFeature(index)}
                       disabled={formData.keyFeatures.length === 1}
-                      className="h-10 w-10 text-gray-400 hover:text-white"
+                      className="h-10 w-10 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]"
                     >
                       <X className="h-4 w-4" />
                     </Button>
@@ -210,14 +210,14 @@ export default function FeatureDialog({ open, onOpenChange, onSave, feature }: F
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              className="bg-transparent border-gray-900 text-gray-300 hover:bg-gray-800"
+              className="bg-transparent border-[hsl(var(--border))] text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--secondary))]"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={isSubmitting || !formData.title.trim() || !formData.description.trim()}
-              className="bg-green-800 hover:bg-green-900 text-white"
+              className="bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/90 text-[hsl(var(--primary-foreground))]"
             >
               {isSubmitting ? 'Saving...' : feature ? 'Update' : 'Add'}
             </Button>

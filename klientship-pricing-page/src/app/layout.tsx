@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
@@ -46,8 +47,12 @@ export default function RootLayout({
           <StickyHeader>
             <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Link href="/" className="font-bold text-xl tracking-tight" aria-label="S_CRL DIGITAL - Homepage">S_CRL</Link>
-                <div className="text-xs tracking-tight">DIGITAL</div>
+                <Link href="/" className="font-bold text-xl tracking-tight" aria-label="Social Bumble - Homepage">
+                  <Image src="https://klientship.online/social-bubble/assets/images/logo.png"
+                    height={60}
+                    width={60}
+                    alt="Social Bumble Logo" />
+                </Link>
               </div>
               <div className="flex items-center gap-4">
                 <ThemeToggle />
@@ -57,24 +62,28 @@ export default function RootLayout({
               </div>
             </div>
           </StickyHeader>
-          
+
           <main id="main-content">
             {children}
           </main>
-          
+
           <footer className="bg-neutral-900 text-white py-12" role="contentinfo">
             <div className="max-w-6xl mx-auto px-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div>
                   <div className="flex items-center gap-2 mb-4">
-                    <Link href="/" className="font-bold text-xl tracking-tight" aria-label="S_CRL DIGITAL - Homepage">S_CRL</Link>
-                    <div className="text-xs tracking-tight">DIGITAL</div>
+                    <Link href="/" className="font-bold text-xl tracking-tight" aria-label="SOCIAL BUMBLE - Homepage">
+                      <Image src="https://klientship.online/social-bubble/assets/images/logo-white.png"
+                        height={80}
+                        width={80}
+                        alt="Social Bumble Logo" />
+                    </Link>
                   </div>
                   <p className="text-gray-400 text-sm">
                     Designing Functional Web Experiences That Bring More Response to the Digital World.
                   </p>
                 </div>
-                
+
                 <nav aria-label="Quick Links">
                   <h3 className="font-medium mb-4">Quick Links</h3>
                   <ul className="space-y-2 text-sm text-gray-400">
@@ -95,7 +104,7 @@ export default function RootLayout({
                     </li>
                   </ul>
                 </nav>
-                
+
                 <nav aria-label="Company Info">
                   <h3 className="font-medium mb-4">Company</h3>
                   <ul className="space-y-2 text-sm text-gray-400">
@@ -117,13 +126,13 @@ export default function RootLayout({
                   </ul>
                 </nav>
               </div>
-              
+
               <div className="border-t border-gray-800 pt-8 text-sm text-gray-500">
                 <p>Copyright © {new Date().getFullYear()} Klientship Technologies. All rights reserved.</p>
               </div>
             </div>
           </footer>
-          
+
           <ScrollToTop />
           <Toaster />
         </ThemeProvider>

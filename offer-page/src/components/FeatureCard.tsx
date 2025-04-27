@@ -65,12 +65,12 @@ export default function FeatureCard({ feature, onEdit, onDelete }: FeatureCardPr
       transition={{ duration: 0.2 }}
       className="h-full"
     >
-      <Card className="h-full bg-gray-900/95 border-gray-800 overflow-hidden relative group rounded-lg flex flex-col">
+      <Card className="h-full bg-[hsl(var(--card))]/95 border-[hsl(var(--border))] overflow-hidden relative group rounded-lg flex flex-col">
         <div className="absolute top-3 right-3 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <Button
             size="icon"
             variant="outline"
-            className="h-8 w-8 rounded-full bg-black/70 backdrop-blur-sm border-gray-900 text-white hover:bg-black/90 transition-colors"
+            className="h-8 w-8 rounded-full bg-[hsl(var(--background))]/70 backdrop-blur-sm border-[hsl(var(--border))] text-[hsl(var(--foreground))] hover:bg-[hsl(var(--background))]/90 transition-colors"
             onClick={() => onEdit(feature)}
             disabled={isLoading}
             aria-label="Edit service"
@@ -80,7 +80,7 @@ export default function FeatureCard({ feature, onEdit, onDelete }: FeatureCardPr
           <Button
             size="icon"
             variant="outline"
-            className="h-8 w-8 rounded-full bg-black/70 backdrop-blur-sm border-gray-900 text-red-500 hover:text-red-400 hover:bg-black/90 transition-colors"
+            className="h-8 w-8 rounded-full bg-[hsl(var(--background))]/70 backdrop-blur-sm border-[hsl(var(--border))] text-[hsl(var(--destructive))] hover:text-[hsl(var(--destructive))]/90 hover:bg-[hsl(var(--background))]/90 transition-colors"
             onClick={handleDelete}
             disabled={isLoading}
             aria-label="Delete service"
@@ -89,7 +89,7 @@ export default function FeatureCard({ feature, onEdit, onDelete }: FeatureCardPr
           </Button>
         </div>
 
-        <div className="relative h-48 w-full overflow-hidden bg-gray-800">
+        <div className="relative h-48 w-full overflow-hidden bg-[hsl(var(--muted))]">
           <Image
             src={feature.image || '/placeholder.jpg'}
             alt={feature.title}
@@ -98,32 +98,32 @@ export default function FeatureCard({ feature, onEdit, onDelete }: FeatureCardPr
             priority
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))] via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
         </div>
 
         <CardContent className="flex-grow p-6">
-          <h3 className="text-xl font-bold mb-2 text-white group-hover:text-green-700 transition-colors">
+          <h3 className="text-xl font-bold mb-2 text-[hsl(var(--foreground))] group-hover:text-[hsl(var(--primary))] transition-colors">
             {feature.title}
           </h3>
-          <p className="text-gray-400 mb-4 line-clamp-2">{feature.description}</p>
+          <p className="text-[hsl(var(--muted-foreground))] mb-4 line-clamp-2">{feature.description}</p>
 
           {feature.price && (
-            <p className="text-2xl font-bold text-white my-4 group-hover:text-green-700 transition-colors">
+            <p className="text-2xl font-bold text-[hsl(var(--foreground))] my-4 group-hover:text-[hsl(var(--primary))] transition-colors">
               {feature.price}
             </p>
           )}
 
           {feature.keyFeatures && feature.keyFeatures.length > 0 ? (
             <div className="space-y-2">
-              <p className="font-medium text-sm text-gray-400">Key Features:</p>
+              <p className="font-medium text-sm text-[hsl(var(--muted-foreground))]">Key Features:</p>
               <ul className="space-y-1">
                 {feature.keyFeatures.map((item, index) => (
                   <li
                     key={index}
                     className="flex items-start text-sm"
                   >
-                    <span className="text-green-500 mr-2" aria-hidden="true">✓</span>
-                    <span className="text-gray-300 group-hover:text-gray-200 transition-colors">
+                    <span className="text-[hsl(var(--primary))] mr-2" aria-hidden="true">✓</span>
+                    <span className="text-[hsl(var(--foreground))] group-hover:text-[hsl(var(--foreground))] transition-colors">
                       {item}
                     </span>
                   </li>
@@ -131,20 +131,20 @@ export default function FeatureCard({ feature, onEdit, onDelete }: FeatureCardPr
               </ul>
             </div>
           ) : (
-            <p className="text-sm text-gray-500 italic">No key features listed.</p>
+            <p className="text-sm text-[hsl(var(--muted-foreground))] italic">No key features listed.</p>
           )}
         </CardContent>
 
         <CardFooter className="flex gap-2 p-4 pt-0">
           <Button
-            className="flex-1 bg-green-800 hover:bg-green-900 text-white transition-colors"
+            className="flex-1 bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/90 text-[hsl(var(--primary-foreground))] transition-colors"
             onClick={handleKnowMore}
             disabled={isLoading}
           >
             Know more
           </Button>
           <Button
-            className="flex-1 bg-transparent border border-green-800 text-green-500 hover:bg-green-800/10 transition-colors"
+            className="flex-1 bg-transparent border border-[hsl(var(--primary))] text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/10 transition-colors"
             onClick={handleWhatsApp}
             disabled={isLoading}
           >

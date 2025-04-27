@@ -17,9 +17,7 @@ export default function ThemeToggler() {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
     console.log('Switching to theme:', newTheme)
     setTheme(newTheme)
-    // Force a re-render by updating the document class
-    document.documentElement.classList.remove('light', 'dark')
-    document.documentElement.classList.add(newTheme)
+    // Let next-themes handle the DOM manipulation
   }
 
   if (!mounted) return null
@@ -49,3 +47,4 @@ export default function ThemeToggler() {
     </Button>
   )
 }
+

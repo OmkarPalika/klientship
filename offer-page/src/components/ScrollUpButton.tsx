@@ -26,7 +26,7 @@ export default function ScrollUpButton() {
   return (
     <button
       onClick={scrollToTop}
-      className={`rounded-full shadow-lg text-primary-foreground transition-opacity duration-300 hover-effect ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      className={`rounded-full shadow-lg text-[hsl(var(--primary-foreground))] bg-[hsl(var(--primary))] transition-opacity duration-300 hover-effect ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       aria-label="Scroll to top"
       style={{ zIndex: 1000 }}
     >
