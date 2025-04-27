@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "Klientship - Web Development & App Development Services",
   description: "Professional web development and app development services for your business.",
   keywords: "web development, app development, ecommerce, business website, android app",
-  authors: [{ name: "Klientship Technologies" }],
+  authors: [{ name: "Omkar Palika" }],
   openGraph: {
     type: "website",
     title: "Klientship - Web Development & App Development Services",

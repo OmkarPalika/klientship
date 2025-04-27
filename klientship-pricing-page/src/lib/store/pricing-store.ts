@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { PricingStore, PricingCard, Feature, Category } from '@/types/pricing';
+import { PricingStore } from '@/types/pricing';
 import { initialCards } from '@/lib/data';
 
 // Create the store

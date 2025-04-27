@@ -156,7 +156,7 @@ export function PricingCard({ card, onEdit, onDelete, isAdmin = false }: Pricing
 
         <CardHeader className="pb-2 pt-6 space-y-3">
           <div className="w-full aspect-[1.91/1] bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden mb-2 relative">
-            {/* Use Next.js Image for better performance */}
+            {/* Using Next.js Image for better performance */}
             {card.image && (
               <Image 
                 src={card.image}
@@ -164,7 +164,7 @@ export function PricingCard({ card, onEdit, onDelete, isAdmin = false }: Pricing
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover transition-transform hover:scale-105 duration-500"
-                priority={isBestValue} // Prioritize loading for best value cards
+                priority={isBestValue}
               />
             )}
           </div>
